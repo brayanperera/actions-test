@@ -17,3 +17,9 @@ jobs:
     - name: print branch name
       run: |
         echo "${{ steps.extract_branch.outputs.branch }}"
+    - name: print ref name
+      shell: bash
+      run: | 
+        echo "${github_ref#refs/heads/}"
+        echo $GITHUB_REF | tr / -
+        echo $GITHUB_REF
