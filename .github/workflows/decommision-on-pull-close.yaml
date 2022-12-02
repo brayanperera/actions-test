@@ -1,11 +1,11 @@
-name: provision-on-pull-request
+name: decommission-on-pull-close
 
 on:
   pull_request:
     types: [closed]
 
 jobs:
-  provision:
+  decommission:
     runs-on: ubuntu-latest
     steps:
     - name: Get branch name
@@ -20,4 +20,4 @@ jobs:
         echo "${{ steps.extract_branch.outputs.branch }}"
     - name: print ref name
       run: | 
-        cho ${github_ref#refs/heads/})"
+        echo ${github_ref#refs/heads/}
