@@ -15,6 +15,11 @@ jobs:
       shell: bash
       run: echo "##[set-output name=branch;]$(echo ${{ steps.branch-name.outputs.head_ref_branch }})"
       id: extract_branch
+    - uses: jwalton/gh-find-current-pr@v1
+      id: findPr
+      with:
+        # Can be "open", "closed", or "all".  Defaults to "open".
+        state: closed
     - name: print branch name
       run: |
         echo "${{ steps.extract_branch.outputs.branch }}"
@@ -26,3 +31,4 @@ jobs:
         echo $GITHUB_REF
         echo ${{ steps.branch-name.outputs.ref_branch }}
         echo $GITHUB_BASE_REF
+        echo ${{ steps.findPr.outputs.pr }}
