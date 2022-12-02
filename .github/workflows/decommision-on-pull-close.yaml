@@ -23,12 +23,11 @@ jobs:
     - name: print branch name
       run: |
         echo "${{ steps.extract_branch.outputs.branch }}"
-    - name: print ref name
-      shell: bash
+    - name: get-pr-ref
+      run: echo "merge ref is ${MERGE_REF}"
+      if: success() && steps.findPr.outputs.number
+      env:
+        MERGE_REF: "refs/pull/${{ steps.findPr.outputs.pr }}/merge"
+    - name: print mergeref
       run: | 
-        echo "${github_ref#refs/heads/}"
-        echo $GITHUB_REF | tr / -
-        echo $GITHUB_REF
-        echo ${{ steps.branch-name.outputs.ref_branch }}
-        echo $GITHUB_BASE_REF
-        echo ${{ steps.findPr.outputs.pr }}
+        echo $MERGE_REF
