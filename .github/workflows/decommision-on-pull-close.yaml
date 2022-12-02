@@ -1,0 +1,20 @@
+name: provision-on-pull-request
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  provision:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get branch name
+      id: branch-name
+      uses: tj-actions/branch-names@v6
+    - name: extract branch name
+      shell: bash
+      run: echo "##[set-output name=branch;]$(echo ${{ steps.branch-name.outputs.head_ref_branch }})"
+      id: extract_branch
+    - name: print branch name
+      run: |
+        echo "${{ steps.extract_branch.outputs.branch }}"
