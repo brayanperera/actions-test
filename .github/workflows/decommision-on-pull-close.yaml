@@ -25,9 +25,8 @@ jobs:
         echo "${{ steps.extract_branch.outputs.branch }}"
     - name: get-pr-ref
       run: echo "merge ref is ${MERGE_REF}"
-      if: success() && steps.findPr.outputs.number
       env:
         MERGE_REF: "refs/pull/${{ steps.findPr.outputs.pr }}/merge"
     - name: print mergeref
       run: | 
-        echo $MERGE_REF
+        echo ${MERGE_REF}
