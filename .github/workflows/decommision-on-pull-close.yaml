@@ -25,3 +25,4 @@ jobs:
         echo $GITHUB_REF | tr / -
         echo $GITHUB_REF
         echo ${{ steps.branch-name.outputs.ref_branch }}
+        echo $GITHUB_BASE_REF
